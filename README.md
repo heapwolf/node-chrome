@@ -20,7 +20,7 @@ var cn = require('../lib');
 
 var opts = {
   runtime: "/Applications/Google\ Chrome.app/Contents/MacOS/Google\ Chrome",
-  files: "../ui",
+  files: "./ui",
   port: 8080,
   index: "/index.html",
   width: 1024,
@@ -45,4 +45,5 @@ cn(opts, function(websocket, chrome) {
     process.exit(0);
   });
 });
+
 ```
