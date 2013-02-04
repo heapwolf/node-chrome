@@ -1,0 +1,16 @@
+{
+  "name": "node-chrome",
+  "version": "0.0.1",
+  "description": "use chrome to make desktop apps in node.js",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": "",
+  "author": "",
+  "dependencies": {
+    "mime": "1.2.9",
+    "ws": "0.4.25"
+  },
+  "license": "MIT"
+}

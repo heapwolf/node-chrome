@@ -1,0 +1,84 @@
+#!/usr/bin/env node
+
+var spawn = require('child_process').spawn;
+var http = require('http');
+var url = require('url');
+var fs = require('fs');
+var path = require('path');
+var mime = require('mime');
+
+var execpath = '/Applications/Google\ Chrome.app/Contents/MacOS/Google\ Chrome';
+
+var args = [
+  '--app=http://localhost:8080/index.html',
+  '--force-app-mode',
+  '--app-window-size=1024,640',
+  '--enable-crxless-web-apps',
+  '--user-data-dir=' + __dirname
+];
+
+var chrome;
+
+var httpserver = http.createServer(function (req, res) {
+
+  var rawurl = url.parse(req.url);
+  var pathname = decodeURI(rawurl.pathname);
+  var base = path.join(__dirname, 'ui');
+  var filepath = path.normalize(path.join(base, pathname));
+
+  //
+  // set the appropriate mime type if possible.
+  //
+  var p = path.extname(filepath).slice(1);
+  var mimetype = mime.lookup(p);
+
+  if (!mimetype) {
+    return;
+  }
+
+  res.writeHeader('Content-Type', mimetype);
+
+  fs.stat(filepath, function (err, stat) {
+
+    if (err && err.code === 'ENOENT') {
+        res.writeHead(404, { 'Content-Type': 'plain/text' });
+        res.end('not found');
+    }
+    else {
+
+      if (!stat.isDirectory()) {
+        res.writeHead(200, { 'Content-Type': mimetype });
+        fs.createReadStream(filepath).pipe(res);
+      }
+    }
+  });
+
+});
+
+httpserver.listen(8080, function() {
+
+  chrome = spawn(execpath, args);
+
+  chrome.stdout.on('data', function (data) {
+
+  });
+
+  chrome.stderr.on('data', function (data) {
+
+  });
+
+  chrome.on('exit', function (code) {
+
+  });  
+
+});
+
+var WebSocketServer = require('ws').Server;
+var wss = new WebSocketServer({ server: httpserver });
+
+wss.on('connection', function(ws) {
+  ws.on('message', function(message) {
+    console.log(message);
+  });
+});
+

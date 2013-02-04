@@ -7,8 +7,23 @@ lib-cov
 *.pid
 *.gz
 
+*.swp
+*.swo
+
 pids
 logs
 results
 
+data/main
+
+.DS_Store
+node_modules
 npm-debug.log
+
+lib/Default
+lib/PepperFlash/
+node_modules
+lib/Local*
+lib/Safe*
+lib/SingletonLock
+lib/Cert*
