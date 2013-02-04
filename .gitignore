@@ -20,6 +20,7 @@ data/main
 node_modules
 npm-debug.log
 
+lib/chrome*
 lib/Default
 lib/PepperFlash/
 node_modules

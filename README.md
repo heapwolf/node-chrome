@@ -13,7 +13,7 @@ There are two ways you can do this. Use an existing chrome executable or bundle
 a version of it. If you bundle a version of it, you can be sure it works on the
 target platform, as well as your own icon.
 
-```json
+```js
 #!/usr/bin/env node
 
 var cn = require('../lib');
@@ -42,7 +42,7 @@ cn(opts, function(websocket, chrome) {
   });
 
   chrome.on('exit', function (code) {
-
+    process.exit(0);
   });
 });
 ```

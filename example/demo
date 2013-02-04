@@ -26,6 +26,6 @@ cn(opts, function(websocket, chrome) {
   });
 
   chrome.on('exit', function (code) {
-
+    process.exit(0);
   });
 });

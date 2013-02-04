@@ -1,6 +1,6 @@
 {
   "name": "node-chrome",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "use chrome to make desktop apps in node.js",
   "main": "index.js",
   "scripts": {
