@@ -1,4 +1,3 @@
-
 # NAME
 node-chrome(3)
 
@@ -6,17 +5,18 @@ node-chrome(3)
 Make apps with Node.js and Chrome
 
 # DESCRIPTION
-Use chrome to make desktop apps in node.js
+Use Chrome to make desktop apps in Node.js. Runs on platforms that Chrome and 
+Node.js run on.
 
 # EXAMPLES
-There are two ways you can do this. Use an existing chrome executable or bundle
-a version of it. If you bundle a version of it, you can be sure it works on the
-target platform, as well as your own icon.
+The `runtime` can point to an existing Chrome binary. You could also bundle a copy 
+of it with your project. Bundling it means you can change the icon and other such.
+things.
 
 ```js
 #!/usr/bin/env node
 
-var cn = require('../lib');
+var nc = require('node-chrome');
 
 var opts = {
   runtime: "/Applications/Google\ Chrome.app/Contents/MacOS/Google\ Chrome",
@@ -27,23 +27,21 @@ var opts = {
   height: 760
 };
 
-cn(opts, function(websocket, chrome) {
+nc(opts, function(websocket, chrome) {
 
+  // output from the socket.
   websocket.on('message', function(message) {
     console.log(message);
   });
 
+  // output from the chrome runtime.
   chrome.stdout.on('data', function (data) {
-
+    console.log(data);
   });
 
-  chrome.stderr.on('data', function (data) {
-
-  });
-
+  // when the user quits the app.
   chrome.on('exit', function (code) {
     process.exit(0);
   });
 });
-
 ```
