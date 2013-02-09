@@ -2,11 +2,13 @@
 node-chrome(3)
 
 # SYNOPSIS
-Make apps with Node.js and Chrome
+Make desktop apps with Node.js and Chrome
 
 # DESCRIPTION
-Use Chrome to make desktop apps in Node.js. Runs on platforms that Chrome and 
-Node.js run on.
+This module demonstrates how well Node.js and Google Chrome (as two autonomous 
+binaries) can cooperate wihtout much programatic interfacing. Node-chrome is 
+the absolute least amount of glue needed to create a desktop experience with 
+Node.js. The module will run on platforms that Chrome and Node.js run on.
 
 # EXAMPLES
 The `runtime` can point to an existing Chrome binary. You could also bundle a copy 
