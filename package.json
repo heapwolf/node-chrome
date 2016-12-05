@@ -1,0 +1,28 @@
+{
+  "name": "node-chrome",
+  "version": "1.0.0",
+  "description": "Run chrome headlessly as a module or as a command from the commandline.",
+  "main": "index.js",
+  "directories": {
+    "test": "test"
+  },
+  "dependencies": {
+    "electron": "^1.4.10"
+  },
+  "devDependencies": {
+    "tape": "^4.6.3"
+  },
+  "scripts": {
+    "test": "node test/index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/0x00A/node-chrome.git"
+  },
+  "author": "hij1nx",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/0x00A/node-chrome/issues"
+  },
+  "homepage": "https://github.com/0x00A/node-chrome#readme"
+}
