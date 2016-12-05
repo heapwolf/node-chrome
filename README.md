@@ -6,8 +6,10 @@ it's simpler, no streams or any servers, etc.
 # USAGE
 
 ## FROM THE COMMANDLINE
+The html file is optional (an empty one will be used by default).
+
 ```bash
-node-chrome index.js index.html
+node-chrome index.js [index.html]
 ```
 
 ## AS A MODULE
@@ -18,7 +20,8 @@ const path = require('path')
 const js = path.join(__dirname, 'index.js')
 const html = path.join(__dirname, 'index.html')
 
-const chrome = chrome(js, html)
+const chrome = chrome(js, html) // html is optional
+
 chrome.on('stdout', (data) => console.log(data))
 chrome.on('exit', (code, sig) => process.exit(code, sig))
 ```
