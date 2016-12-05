@@ -1,7 +1,7 @@
 # SYNOPSIS
 Run chrome headlessly as a module or as a command from the commandline. This
-project was inspired by [electron-stream](https://github.com/juliangruber/electron-stream),
-it's similar but doesnt require node streams or any servers.
+project is similar to [electron-stream](https://github.com/juliangruber/electron-stream),
+it's simpler, no streams or any servers, etc.
 
 # USAGE
 
