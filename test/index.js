@@ -7,8 +7,6 @@ test('the textContent is extracted', assert => {
 
   ps.on('stdout', (data) => {
     assert.equal(data, 'Hello')
-  })
-  ps.on('exit', (code, sig) => {
     assert.end()
   })
 })

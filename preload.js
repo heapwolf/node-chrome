@@ -3,13 +3,10 @@ window.alert = () => {}
 
 (function () {
   const fs = require('fs')
-
   const {
     remote,
     ipcRenderer: ipc
   } = require('electron')
-
-  const js = remote.getGlobal('js')
 
   function rebind () {
     const log = console.log
@@ -31,6 +28,7 @@ window.alert = () => {}
     }
   }
 
+  const js = remote.getGlobal('js')
   fs.stat(js, err => {
     if (err) {
       return process.send(err.stack)

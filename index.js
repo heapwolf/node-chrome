@@ -1,3 +1,4 @@
+#!/usr/bin/env node
 const electron = require('electron')
 const child = require('child_process')
 const ipc = electron.ipcMain
@@ -58,6 +59,7 @@ function main () {
       win = null
       process.exit(code, sig)
     })
+
     return 0
   }
 

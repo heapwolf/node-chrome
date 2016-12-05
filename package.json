@@ -3,6 +3,7 @@
   "version": "1.0.0",
   "description": "Run chrome headlessly as a module or as a command from the commandline.",
   "main": "index.js",
+  "bin": "index.js",
   "directories": {
     "test": "test"
   },
