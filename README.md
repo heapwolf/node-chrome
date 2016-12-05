@@ -6,13 +6,15 @@ but it's simpler, no streams, no servers, etc.
 # USAGE
 
 ## FROM THE COMMANDLINE
-The html file is optional (an empty one will be used by default).
+The `html` file is optional (an empty one will be used by default).
 
 ```bash
 node-chrome index.js [index.html]
 ```
 
 ## AS A MODULE
+Provides an event emitter with `stdout`, `stderr` and `exit`.
+
 ```js
 const chrome = require('node-chrome')
 const path = require('path')
@@ -26,3 +28,8 @@ chrome.on('stdout', (data) => console.log(data))
 chrome.on('exit', (code, sig) => process.exit(code, sig))
 ```
 
+Kill an isntance with `kill`.
+
+```js
+chrome.kill(/* sig */)
+```

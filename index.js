@@ -1,4 +1,3 @@
-#!/usr/bin/env node
 const electron = require('electron')
 const child = require('child_process')
 const events = require('events')
@@ -23,6 +22,7 @@ module.exports = function (javascript, html) {
     const ee = new events.EventEmitter()
     sp.on('message', msg => ee.emit(msg.event, msg.output))
     sp.on('exit', (code, sig) => ee.emit('exit', code, sig))
+    ee.on('kill', (sig) => sp.kill(sp.pid, sig))
     return ee
   }
 }
