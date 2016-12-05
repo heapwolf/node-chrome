@@ -1,0 +1,13 @@
+#!/usr/bin/env node
+const path = require('path')
+const chrome = require('../index')
+const args = process.argv
+
+const javascript = path.join(process.cwd(), args[2])
+
+const html = args[3]
+  ? path.join(process.cwd(), args[3])
+  : path.join(__dirname, 'index.html')
+
+chrome(javascript, html)
+

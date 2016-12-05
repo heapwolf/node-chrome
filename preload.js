@@ -1,40 +1,31 @@
 
+// preload is invoked in a closure, its not global, so no iife required.
 window.alert = () => {}
+const log = console.log
+const error = console.error
 
-(function () {
-  const fs = require('fs')
-  const {
-    remote,
-    ipcRenderer: ipc
-  } = require('electron')
+const fs = require('fs')
+const { remote, ipcRenderer: ipc } = require('electron')
+const source = remote.getGlobal('source')
 
-  function rebind () {
-    const log = console.log
-    const error = console.error
+console.log = (...args) => {
+  ipc.send('stdout', ...args)
+  log(...args)
+}
 
-    console.log = (...args) => {
-      ipc.send('stdout', ...args)
-      log(...args)
-    }
+console.error = (...args) => {
+  ipc.send('stderr', ...args)
+  error(...args)
+}
 
-    console.error = (...args) => {
-      ipc.send('stderr', ...args)
-      error(...args)
-    }
+const die = (...args) => {
+  console.error(...args)
+  window.close()
+}
 
-    window.onerror = (...args) => {
-      console.error(args[4].stack)
-      window.close()
-    }
-  }
+window.onerror = (...args) => die(args[4].stack)
 
-  const js = remote.getGlobal('js')
-  fs.stat(js, err => {
-    if (err) {
-      return process.send(err.stack)
-    }
-    rebind()
-    require(js)
-  })
-}())
-
+fs.stat(source, err => {
+  if (err) return die(err.stack)
+  require(source)
+})

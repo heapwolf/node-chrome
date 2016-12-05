@@ -1,13 +1,24 @@
 const test = require('tape')
-const Browser = require('../index')
+const Chrome = require('../index')
 const path = require('path')
 
 test('the textContent is extracted', assert => {
-  const ps = Browser(path.join(__dirname, 'browser.js'))
+  const javascript = path.join(__dirname, 'browser0.js')
 
-  ps.on('stdout', (data) => {
+  const chrome = Chrome(javascript)
+  chrome.on('stdout', (data) => {
     assert.equal(data, 'Hello')
     assert.end()
   })
 })
 
+test('the textContent is extracted using non default html', assert => {
+  const javascript = path.join(__dirname, 'browser1.js')
+  const html = path.join(__dirname, 'alternate-index.html')
+
+  const chrome = Chrome(javascript, html)
+  chrome.on('stdout', (data) => {
+    assert.equal(data, 'OK')
+    assert.end()
+  })
+})
