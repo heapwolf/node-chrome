@@ -5,12 +5,24 @@ const path = require('path')
 
 const parent = path.join(__dirname, 'bin/node-chrome')
 
-module.exports = function (javascript, html) {
+module.exports = function (opts) {
   const main = path.join(__dirname, 'main.js')
   const stdio = [null, null, null, 'ipc']
   const preload = path.join(__dirname, 'preload.js')
+  const options = []
 
-  const args = [main, preload, javascript, html]
+  if (typeof opts === 'string') {
+    options.push('-s', opts)
+  } else {
+    if (opts.js) {
+      options.push('--js', opts.js)
+    }
+    if (opts.html) {
+      options.push('--html', opts.html)
+    }
+  }
+
+  const args = [main, preload, ...options]
   const sp = child.spawn(electron, args, { stdio })
 
   // running as bin script

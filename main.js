@@ -1,11 +1,10 @@
 const electron = require('electron')
+const minimist = require('minimist')
+const argv = minimist(process.argv.slice(2))
 const ipc = electron.ipcMain
 
-const preload = process.argv[2]
-const javascript = process.argv[3]
-const html = process.argv[4]
-
-global.source = javascript
+global.js = argv.js
+global.s = argv.s
 
 electron.app.dock.hide()
 electron.app.on('ready', () => {
@@ -19,8 +18,7 @@ electron.app.on('ready', () => {
 
   const w = new electron.BrowserWindow({
     show: false,
-    webPreferences: { preload, nodeIntegration: false }
+    webPreferences: { preload: argv._[0], nodeIntegration: false }
   })
-
-  w.loadURL('file://' + html)
+  w.loadURL('file://' + (argv.html || __dirname + '/index.html'))
 })

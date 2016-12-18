@@ -19,10 +19,14 @@ Provides an event emitter with `stdout`, `stderr` and `exit`.
 const Chrome = require('node-chrome')
 const path = require('path')
 
-const js = path.join(__dirname, 'index.js')
-const html = path.join(__dirname, 'index.html')
+const chrome = Chrome('<h1>Hello World</h1>')
 
-const chrome = Chrome(js, html) // html is optional
+//
+// or pass in file names...
+//
+// const js = path.join(__dirname, 'index.js')
+// const html = path.join(__dirname, 'index.html')
+// const chrome = Chrome({ js, html })
 
 chrome.on('stdout', (data) => console.log(data))
 chrome.on('exit', (code, sig) => process.exit(code, sig))

@@ -6,7 +6,8 @@ const error = console.error
 
 const fs = require('fs')
 const { remote, ipcRenderer: ipc } = require('electron')
-const source = remote.getGlobal('source')
+const s = remote.getGlobal('s')
+const js = remote.getGlobal('js')
 
 console.log = (...args) => {
   ipc.send('stdout', ...args)
@@ -25,7 +26,14 @@ const die = (...args) => {
 
 window.onerror = (...args) => die(args[4].stack)
 
-fs.stat(source, err => {
-  if (err) return die(err.stack)
-  require(source)
-})
+if (js) {
+  fs.stat(js, err => {
+    if (err) return die(err.stack)
+    require(js)
+  })
+}
+
+if (s) {
+  eval(s)
+}
+
