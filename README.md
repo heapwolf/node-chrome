@@ -16,13 +16,13 @@ node-chrome index.js [index.html]
 Provides an event emitter with `stdout`, `stderr` and `exit`.
 
 ```js
-const chrome = require('node-chrome')
+const Chrome = require('node-chrome')
 const path = require('path')
 
 const js = path.join(__dirname, 'index.js')
 const html = path.join(__dirname, 'index.html')
 
-const chrome = chrome(js, html) // html is optional
+const chrome = Chrome(js, html) // html is optional
 
 chrome.on('stdout', (data) => console.log(data))
 chrome.on('exit', (code, sig) => process.exit(code, sig))
