@@ -5,21 +5,26 @@ const path = require('path')
 
 const parent = path.join(__dirname, 'bin/node-chrome')
 
-module.exports = function (opts) {
+module.exports = function (...argv) {
   const main = path.join(__dirname, 'main.js')
   const stdio = [null, null, null, 'ipc']
   const preload = path.join(__dirname, 'preload.js')
   const options = []
 
-  if (typeof opts === 'string') {
-    options.push('-s', opts)
-  } else {
+  if (typeof argv[0] === 'string') {
+    options.push('-s', argv[0])
+  } else if (typeof argv[0] === 'object') {
+    const opts = argv[0]
     if (opts.js) {
       options.push('--js', opts.js)
     }
     if (opts.html) {
       options.push('--html', opts.html)
     }
+  }
+
+  if (argv[1]) {
+    options.push('--node')
   }
 
   const args = [main, preload, ...options]

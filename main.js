@@ -18,7 +18,7 @@ electron.app.on('ready', () => {
 
   const w = new electron.BrowserWindow({
     show: false,
-    webPreferences: { preload: argv._[0], nodeIntegration: false }
+    webPreferences: { preload: argv._[0], nodeIntegration: !!argv.node }
   })
   w.loadURL('file://' + (argv.html || __dirname + '/index.html'))
 })

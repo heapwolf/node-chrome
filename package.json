@@ -1,6 +1,6 @@
 {
   "name": "node-chrome",
-  "version": "1.2.2",
+  "version": "1.2.3",
   "description": "Run chrome headlessly as a module or as a command from the commandline.",
   "main": "index.js",
   "bin": "./bin/node-chrome",

@@ -23,3 +23,13 @@ test('the textContent is extracted using non default html', assert => {
     assert.end()
   })
 })
+
+test('support node', assert => {
+  const source = `console.log(!!require('os')); window.close()`
+  const chrome = Chrome(source, true)
+  chrome.on('stdout', data => {
+    assert.equal(data, true)
+    assert.end()
+  })
+})
+
